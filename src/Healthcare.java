@@ -1,29 +1,23 @@
 public class Healthcare {
-    private String Patient;
-    private String Professional;
-    private String Hospital;
+    private Patient patient;
+    private Professional professional;
+    private Hospital hospital;
 
-    public Healthcare(String Patient, String Professional, String Hospital) {
-        this.Patient = Patient;
-        this.Professional = Professional;
-        this.Hospital = Hospital;
+    public Healthcare(Patient patient, Professional professional, Hospital hospital) {
+        this.patient = patient;
+        this.professional = professional;
+        this.hospital = hospital;
     }
-    public void setPatient(String Patient) {
-        this.Patient = Patient;
+
+    public Patient getPatient() {
+        return patient;
     }
-    public String getPatient() {
-        return Patient;
+
+    public Professional getProfessional() {
+        return professional;
     }
-    public void setProfessional(String Professional) {
-        this.Professional = Professional;
-    }
-    public String getProfessional() {
-        return Professional;
-    }
-    public void setHospital(String Hospital) {
-        this.Hospital = Hospital;
-    }
-    public String getHospital() {
-        return Hospital;
+
+    public Hospital getHospital() {
+        return hospital;
     }
 }
