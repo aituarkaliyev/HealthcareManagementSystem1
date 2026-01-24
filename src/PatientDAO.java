@@ -2,6 +2,7 @@ import java.sql.*;
 
 public class PatientDAO {
 
+
     public static void addPatient(String name, int age, String diagnosis) throws SQLException {
         String sql = "INSERT INTO patient (name, age, diagnosis) VALUES (?, ?, ?)";
         Connection conn = Database.connect();
@@ -12,7 +13,6 @@ public class PatientDAO {
         ps.executeUpdate();
         conn.close();
     }
-
     public static void getPatients() throws SQLException {
         String sql = "SELECT * FROM patient";
         Connection conn = Database.connect();
@@ -48,5 +48,6 @@ public class PatientDAO {
         ps.executeUpdate();
         conn.close();
     }
+
 }
 

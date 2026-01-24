@@ -1,18 +1,17 @@
-public class Main {
-    public static void main(String[] args) {
-        try {
-            PatientDAO.addPatient("Alice", 25, "Cold");
-            PatientDAO.getPatients();
+public static void main(String[] args) {
+    try {
+        PatientDAO.addPatient("Alice", 25, "Cold");
+        PatientDAO.getPatients();
 
-            Professional doctor = new Professional(1, "Dr. Brown", "Therapist");
-            System.out.println(doctor.getName() + " - " + doctor.getSpecialization());
+        PatientDAO.updatePatientName(1, "Hot");
+        PatientDAO.getPatients();
 
-            Hospital h = new Hospital("City Hospital", "Astana", 300);
-            System.out.println(h.getName());
-            System.out.println(h.isLargeHospital());
+        PatientDAO.deletePatient(1);
+        PatientDAO.getPatients();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
 }
+
+
