@@ -1,15 +1,16 @@
 public class Professional {
+    private int id;
     private String name;
+    private String specialization;
 
-    public Professional(String name) {
+    public Professional(int id, String name, String specialization) {
+        this.id = id;
         this.name = name;
+        this.specialization = specialization;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getSpecialization() { return specialization; }
 }
+

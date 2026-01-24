@@ -1,21 +1,18 @@
 public class Main {
     public static void main(String[] args) {
+        try {
+            PatientDAO.addPatient("Alice", 25, "Cold");
+            PatientDAO.getPatients();
 
-        Patient patient = new Patient("Aituar");
-        Professional professional = new Professional("Dr. Tenma");
-        Hospital hospital = new Hospital("Hospital st. Augustine");
+            Professional doctor = new Professional(1, "Dr. Brown", "Therapist");
+            System.out.println(doctor.getName() + " - " + doctor.getSpecialization());
 
-        Healthcare healthcare = new Healthcare(
-                patient,
-                professional,
-                hospital
-        )
-                ;
+            Hospital h = new Hospital("City Hospital", "Astana", 300);
+            System.out.println(h.getName());
+            System.out.println(h.isLargeHospital());
 
-        System.out.println(healthcare.getPatient().getName());
-        System.out.println(healthcare.getProfessional().getName());
-        System.out.println(healthcare.getHospital().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
-
