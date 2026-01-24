@@ -1,12 +1,12 @@
 public class Main {
     public static void main(String[] args) {
         try {
-            PatientDAO.addPatient("Alice", 25, "Hot");
+            PatientDAO.addPatient("Gloria", 25, "Hot");
 
             System.out.println("Before update:");
             PatientDAO.getPatients();
 
-            PatientDAO.updatePatientName(1, "Alice Updated");
+            PatientDAO.updatePatientName(3, "Sacha");
 
             System.out.println("After update:");
             PatientDAO.getPatients();
