@@ -1,17 +1,21 @@
-public static void main(String[] args) {
-    try {
-        PatientDAO.addPatient("Alice", 25, "Cold");
-        PatientDAO.getPatients();
+public class Main {
+    public static void main(String[] args) {
+        try {
+            PatientDAO.addPatient("Alice", 25, "Hot");
 
-        PatientDAO.updatePatientName(1, "Hot");
-        PatientDAO.getPatients();
+            System.out.println("Before update:");
+            PatientDAO.getPatients();
 
-        PatientDAO.deletePatient(1);
-        PatientDAO.getPatients();
+            PatientDAO.updatePatientName(1, "Alice Updated");
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            System.out.println("After update:");
+            PatientDAO.getPatients();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
 
 
