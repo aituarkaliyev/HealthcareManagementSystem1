@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Patient {
     private int id;
     private String name;
@@ -15,4 +17,27 @@ public class Patient {
     public String getName() { return name; }
     public int getAge() { return age; }
     public String getDiagnosis() { return diagnosis; }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", diagnosis='" + diagnosis + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Patient)) return false;
+        Patient patient = (Patient) o;
+        return id == patient.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

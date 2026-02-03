@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Hospital {
     private String name;
     private String address;
@@ -14,10 +16,31 @@ public class Hospital {
     public int getCapacity() { return capacity; }
 
     public String isLargeHospital() {
-        if (capacity >= 200) {
-            return "This is a large hospital.";
-        } else {
-            return "This is a small hospital.";
-        }
+        return capacity >= 200
+                ? "This is a large hospital."
+                : "This is a small hospital.";
+    }
+
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", capacity=" + capacity +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hospital)) return false;
+        Hospital hospital = (Hospital) o;
+        return Objects.equals(name, hospital.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
+
