@@ -1,53 +1,76 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientDAO {
 
+    public void addPatient(Patient patient) {
+        String sql = "INSERT INTO patients VALUES (?, ?, ?, ?)";
 
-    public static void addPatient(String name, int age, String diagnosis) throws SQLException {
-        String sql = "INSERT INTO patient (name, age, diagnosis) VALUES (?, ?, ?)";
-        Connection conn = Database.connect();
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, name);
-        ps.setInt(2, age);
-        ps.setString(3, diagnosis);
-        ps.executeUpdate();
-        conn.close();
-    }
-    public static void getPatients() throws SQLException {
-        String sql = "SELECT * FROM patient";
-        Connection conn = Database.connect();
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        while (rs.next()) {
-            System.out.println(
-                    rs.getInt("id") + " | " +
-                            rs.getString("name") + " | " +
-                            rs.getInt("age") + " | " +
-                            rs.getString("diagnosis")
-            );
+            stmt.setInt(1, patient.getId());
+            stmt.setString(2, patient.getName());
+            stmt.setInt(3, patient.getAge());
+            stmt.setString(4, patient.getDiagnosis());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        conn.close();
     }
 
-    public static void updatePatientName(int id, String newName) throws SQLException {
-        String sql = "UPDATE patient SET name = ? WHERE id = ?";
-        Connection conn = Database.connect();
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, newName);
-        ps.setInt(2, id);
-        ps.executeUpdate();
-        conn.close();
+    public List<Patient> getAllPatients() {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT * FROM patients";
+
+        try (Connection conn = Database.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                patients.add(new Patient(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getString("diagnosis")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return patients;
     }
 
-    public static void deletePatient(int id) throws SQLException {
-        String sql = "DELETE FROM patient WHERE id = ?";
-        Connection conn = Database.connect();
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        ps.executeUpdate();
-        conn.close();
+    public void updateDiagnosis(int id, String diagnosis) {
+        String sql = "UPDATE patients SET diagnosis = ? WHERE id = ?";
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, diagnosis);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void deletePatient(int id) {
+        String sql = "DELETE FROM patients WHERE id = ?";
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
-

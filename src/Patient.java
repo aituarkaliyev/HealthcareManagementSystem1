@@ -1,31 +1,31 @@
-import java.util.Objects;
+public class Patient extends Person {
 
-public class Patient {
-    private int id;
-    private String name;
     private int age;
     private String diagnosis;
 
     public Patient(int id, String name, int age, String diagnosis) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.age = age;
         this.diagnosis = diagnosis;
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getDiagnosis() { return diagnosis; }
+    public int getAge() {
+        return age;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    @Override
+    public String getRole() {
+        return "Patient";
+    }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", diagnosis='" + diagnosis + '\'' +
-                '}';
+        return "Patient{id=" + id + ", name='" + name +
+                "', age=" + age + ", diagnosis='" + diagnosis + "'}";
     }
 
     @Override
@@ -38,6 +38,6 @@ public class Patient {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Integer.hashCode(id);
     }
 }
