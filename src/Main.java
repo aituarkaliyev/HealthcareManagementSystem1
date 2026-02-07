@@ -50,7 +50,7 @@ public class Main {
         }
         System.out.println();
 
-        Patient patientCopy = new Patient(1, "John Doe", 30, "Flu");
+        Patient patientCopy = new Patient(1, "Aituar", 18, "Overweight");
 
         System.out.println("patient1 equals patientCopy:");
         System.out.println(patient1.equals(patientCopy));
