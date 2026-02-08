@@ -5,7 +5,7 @@ import java.util.List;
 public class PatientDAO {
 
     public void addPatient(Patient patient) {
-        String sql = "INSERT INTO patients VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO patient (id, name, age, diagnosis) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -24,7 +24,7 @@ public class PatientDAO {
 
     public List<Patient> getAllPatients() {
         List<Patient> patients = new ArrayList<>();
-        String sql = "SELECT * FROM patients";
+        String sql = "SELECT id, name, age, diagnosis FROM patient";
 
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
@@ -42,11 +42,12 @@ public class PatientDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return patients;
     }
 
     public void updateDiagnosis(int id, String diagnosis) {
-        String sql = "UPDATE patients SET diagnosis = ? WHERE id = ?";
+        String sql = "UPDATE patient SET diagnosis = ? WHERE id = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -61,7 +62,7 @@ public class PatientDAO {
     }
 
     public void deletePatient(int id) {
-        String sql = "DELETE FROM patients WHERE id = ?";
+        String sql = "DELETE FROM patient WHERE id = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
