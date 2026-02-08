@@ -24,8 +24,8 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient{id=" + id + ", name='" + name +
-                "', age=" + age + ", diagnosis='" + diagnosis + "'}";
+        return "Patient=" + id + ", name:" + name +
+                ", age: " + age + ", name of diagnosis=" + diagnosis + "";
     }
 
     @Override

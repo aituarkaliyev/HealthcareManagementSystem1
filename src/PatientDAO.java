@@ -46,19 +46,25 @@ public class PatientDAO {
         return patients;
     }
 
-    public void updateDiagnosis(int id, String diagnosis) {
-        String sql = "UPDATE patient SET diagnosis = ? WHERE id = ?";
+    public boolean updateDiagnosis(int id, String newDiagnosis) {
+        String sql =
+                "UPDATE patient " +
+                        "SET diagnosis = ? " +
+                        "WHERE id = ? AND diagnosis <> ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, diagnosis);
+            stmt.setString(1, newDiagnosis);
             stmt.setInt(2, id);
-            stmt.executeUpdate();
+            stmt.setString(3, newDiagnosis);
+
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public void deletePatient(int id) {
